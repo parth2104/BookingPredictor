@@ -13,16 +13,21 @@ stages:
   data_preprocessing:
     cmd: python -m src.data_preprocessing
     deps:
-       - config/config.yaml
-       - config/path_config.py
-       - src/data_ingestion.py
-       - artifacts/raw/train.csv
-       - artifacts/raw/test.csv
+      - config/config.yaml
+      - config/path_config.py
+      - src/data_ingestion.py
+      - artifacts/raw/train.csv
+      - artifacts/raw/test.csv
     outs: 
-      - artifacts\preprocessed\label_encoder.pkl
-      - artifacts\preprocessed\preprocessor.pkl
-      - artifacts\preprocessed\preprocessed_train.npz
-      - artifacts\preprocessed\preprocessed_train.npz
+      - artifacts/preprocessed/label_encoder.pkl
+      - artifacts/preprocessed/preprocessor.pkl
+      - artifacts/preprocessed/preprocessed_train.npz
 
-
-    
+  model_training:
+    cmd: python -m src.model_training
+    deps:
+      - config/config.yaml
+      - config/path_config.py
+      - src/data_preprocessing.py
+    outs: 
+      - artifacts/Model/model.pkl
