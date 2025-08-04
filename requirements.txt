@@ -1,0 +1,11 @@
+pandas 
+numpy
+scikit-learn
+seaborn
+pyyaml
+google-cloud-storage 
+dvc
+imbalanced-learn
+xgboost 
+mlflow==2.12.1
+#-e .

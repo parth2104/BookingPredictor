@@ -1,0 +1,28 @@
+stages:
+  data_ingestion:
+    cmd: python -m src.data_ingestion
+    deps:
+      - config/config.yaml
+      - config/path_config.py
+      - src/data_ingestion.py
+    outs:
+      - artifacts/raw/raw.csv
+      - artifacts/raw/train.csv
+      - artifacts/raw/test.csv
+
+  data_preprocessing:
+    cmd: python -m src.data_preprocessing
+    deps:
+       - config/config.yaml
+       - config/path_config.py
+       - src/data_ingestion.py
+       - artifacts/raw/train.csv
+       - artifacts/raw/test.csv
+    outs: 
+      - artifacts\preprocessed\label_encoder.pkl
+      - artifacts\preprocessed\preprocessor.pkl
+      - artifacts\preprocessed\preprocessed_train.npz
+      - artifacts\preprocessed\preprocessed_train.npz
+
+
+    
