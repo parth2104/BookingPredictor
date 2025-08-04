@@ -1,0 +1,86 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python -m src.data_ingestion
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 16f7088b7b0339d6f4497cacad80138e
+      size: 665
+    - path: config/path_config.py
+      hash: md5
+      md5: 25ce06b24a74170c71bcac651e14b431
+      size: 1090
+    - path: src/data_ingestion.py
+      hash: md5
+      md5: 148a52b713c6caeaae3eed6dad952e34
+      size: 2426
+    outs:
+    - path: artifacts/raw/raw.csv
+      hash: md5
+      md5: 922b55cf208d0549792548e5a3cff6f5
+      size: 3240604
+    - path: artifacts/raw/test.csv
+      hash: md5
+      md5: 0a16d64b59fe2a99932c000efae0afb9
+      size: 655384
+    - path: artifacts/raw/train.csv
+      hash: md5
+      md5: 9282c39cd35eaf76807df6338450039e
+      size: 2619561
+  data_preprocessing:
+    cmd: python -m src.data_preprocessing
+    deps:
+    - path: artifacts/raw/test.csv
+      hash: md5
+      md5: 0a16d64b59fe2a99932c000efae0afb9
+      size: 655384
+    - path: artifacts/raw/train.csv
+      hash: md5
+      md5: 9282c39cd35eaf76807df6338450039e
+      size: 2619561
+    - path: config/config.yaml
+      hash: md5
+      md5: 16f7088b7b0339d6f4497cacad80138e
+      size: 665
+    - path: config/path_config.py
+      hash: md5
+      md5: 25ce06b24a74170c71bcac651e14b431
+      size: 1090
+    - path: src/data_ingestion.py
+      hash: md5
+      md5: 148a52b713c6caeaae3eed6dad952e34
+      size: 2426
+    outs:
+    - path: artifacts/preprocessed/label_encoder.pkl
+      hash: md5
+      md5: ecd321126cfcc886860e12dfafd92bb0
+      size: 1675
+    - path: artifacts/preprocessed/preprocessed_train.npz
+      hash: md5
+      md5: 792d3cbca4768134674af2cd32a94688
+      size: 322559
+    - path: artifacts/preprocessed/preprocessor.pkl
+      hash: md5
+      md5: fd2720de18adb720f9ae7b6b3d1e3f5c
+      size: 3437
+  model_training:
+    cmd: python -m src.model_training
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 16f7088b7b0339d6f4497cacad80138e
+      size: 665
+    - path: config/path_config.py
+      hash: md5
+      md5: 25ce06b24a74170c71bcac651e14b431
+      size: 1090
+    - path: src/data_preprocessing.py
+      hash: md5
+      md5: 3fd60305910c66a2f6482b23b5055cc7
+      size: 8780
+    outs:
+    - path: artifacts/Model/model.pkl
+      hash: md5
+      md5: 959b755ce8fe9cdac77fd80db6d9d3f5
+      size: 134425291
