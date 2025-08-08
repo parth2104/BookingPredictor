@@ -10,6 +10,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from src.Exception.exception import CustomException
 from src.logger.logger import logging
 from config.path_config import MODEL_PATH
+import json
 
 
 class MainUtils:
@@ -82,7 +83,7 @@ class MainUtils:
             all_models = dict(all_estimators())
             if model_name not in all_models:
                 raise ValueError(f"{model_name} is not a valid sklearn model.")
-            return all_models[model_name]()  # instantiate
+            return all_models[model_name]()  
         except Exception as e:
             logging.error(CustomException(e, sys))
             raise CustomException(e, sys)
@@ -154,7 +155,8 @@ class MainUtils:
             if not model_list:
                 raise CustomException("Model list is empty", sys)
 
-            best_model_tuple = max(model_list, key=lambda x: x[3])  # score at index 3
+            best_model_tuple = max(model_list, key=lambda x: x[3])
+            logging.info(f"best_model_tuple={best_model_tuple}")
             best_model_name = best_model_tuple[0]
             best_model_object = best_model_tuple[1]
             best_model_metrics = best_model_tuple[2]
@@ -176,3 +178,17 @@ class MainUtils:
             logging.info(f"Updated base model score to {best_model_score}")
         except Exception as e:
             raise CustomException(str(e), sys)
+    
+    def sanitize_key(self,s):
+
+     if not isinstance(s, str):
+        try:
+             
+            s = json.dumps(s)
+        except Exception:
+            s = str(s)
+ 
+     return s.translate(str.maketrans({
+        " ": "_",".": "_", ":": "_", "/": "_", "\\": "_","{": "_",
+        "}": "_", "[": "_","]": "_","'": "",'"': ""
+    }))

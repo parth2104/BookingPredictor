@@ -7,18 +7,23 @@ from src.logger.logger import logging
 from src.cost_model import CostModel
 from utils.common_functions import MainUtils
 from config.path_config import *
-
+import mlflow
+import mlflow.sklearn
+from dotenv import load_dotenv
+import dagshub
 
 
 class ModelTrainer:
 
-    def __init__(self,preprocessed_train_path,prepprocessor_test_path,MODEL_PATH,preprocessor_obj_path,label_encoder):
+    def __init__(self,preprocessed_train_path,prepprocessor_test_path,MODEL_PATH,preprocessor_obj_path,label_encoder,experiment_name):
+
 
         self.test_data=prepprocessor_test_path
         self.train_data=preprocessed_train_path
         self.preprocessor_obj=preprocessor_obj_path
         self.label_encoder=label_encoder
         self.model_path=MODEL_PATH
+        self.experiment_name=experiment_name
         
         self.utils=MainUtils()
 
@@ -82,6 +87,26 @@ class ModelTrainer:
 
             model_config=self.utils.read_yaml(MODEL_PATH)
             base_model_score=float(model_config["base_model_score"])
+            #--------------------------------------MLFLOW_START---------------------------------
+
+            if self.experiment_name:
+                mlflow.set_experiment(self.experiment_name)
+                
+            with mlflow.start_run():
+                mlflow.log_param("best_model_name",best_model_name)
+                mlflow.log_param("best_model_score",best_model_score)
+
+                if isinstance(best_model_metrics, dict):
+                     
+                    for metric_name, metric_value in best_model_metrics.items():
+                        if isinstance(metric_value, list):
+                            mlflow.log_metric(metric_name, float(np.mean(metric_value)))
+                        else:
+                            mlflow.log_metric(metric_name, float(metric_value))
+
+                
+                mlflow.log_metric("best_model_score",best_model_score)
+
 
             if best_model_score >= base_model_score:
 
@@ -97,6 +122,11 @@ class ModelTrainer:
                 logging.info(f"Created cost_model: {cost_model} and their type {type(cost_model)}")
 
                 model_file_path=self.utils.save_preprocessor(cost_model,self.model_path)
+
+                mlflow.sklearn.log_model(best_model_object,artifact_path="Best_model")
+                mlflow.log_artifact(model_file_path)
+                mlflow.log_param("model_file_path",model_file_path)
+
                 logging.info(f"model save sucessfully {model_file_path}")
                 return {
                     "model_path": model_file_path,
@@ -107,6 +137,8 @@ class ModelTrainer:
 
             else:
                 logging.warning("No better model found than existing base model score.")
+                mlflow.log_param("model_file_path",None)
+                mlflow.log_param("message","No model surpassed thae base model score ")
                 return {
                     "model_path": None,
                     "model_name": None,
@@ -114,29 +146,27 @@ class ModelTrainer:
                     "metrics": None,
                     "message": "No model surpassed the base model score."
                 }
-
+                #---------------------------mlflow_end------------------------------
         except Exception as e:
             logging.error(CustomException(str(e),sys))
             raise CustomException(str(e),sys)
     
 if __name__=="__main__":
+
+    load_dotenv()
+    os.getenv("ML_TRACKING_URL")
+    experiment_name="Booking_prediction"
+    dagshub.init(repo_owner='parth2104', repo_name='BookingPredictor', mlflow=True)
+
+
     
     Trainer=ModelTrainer(
         preprocessed_train_path= preprocessed_train_path,
         prepprocessor_test_path= preprocessed_test_path ,
         MODEL_PATH = model_out_put_path,
         preprocessor_obj_path= preprocessor_obj_path,
-        label_encoder= label_encoder
+        label_encoder= label_encoder,
+        experiment_name=experiment_name
     )
     Trainer.model_trainer_initiate()
-     
-
-
-
     
-
-
-
-
-
-
