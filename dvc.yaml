@@ -31,3 +31,12 @@ stages:
       - src/data_preprocessing.py
     outs: 
       - artifacts/Model/model.pkl
+
+  Model_pusher_gcp:
+    cmd: python -m src.Model_pusher_gcp
+    deps:
+      - config/config.yaml
+      - config\path_config.py
+      - artifacts\Model\model.pkl
+
+

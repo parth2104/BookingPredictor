@@ -1,0 +1,203 @@
+2025-08-22 10:39:05,065 - INFO - Loading model...
+2025-08-22 10:39:08,102 - INFO - Model loaded successfully.
+2025-08-22 10:39:08,131 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.129:8080
+2025-08-22 10:39:08,137 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-22 10:39:38,861 - INFO - 192.168.0.129 - - [22/Aug/2025 10:39:38] "GET / HTTP/1.1" 200 -
+2025-08-22 10:39:39,337 - INFO - 192.168.0.129 - - [22/Aug/2025 10:39:39] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-22 10:40:03,091 - INFO - Received input features: [[3. 3. 2. 4. 5. 2. 2. 1. 0. 0.]]
+2025-08-22 10:40:03,091 - ERROR - Error during prediction: 'CostModel' object has no attribute 'predict'
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\app.py", line 59, in index
+    prediction = loaded_model.predict(features)
+AttributeError: 'CostModel' object has no attribute 'predict'
+2025-08-22 10:40:03,099 - INFO - 192.168.0.129 - - [22/Aug/2025 10:40:03] "POST / HTTP/1.1" 200 -
+2025-08-22 10:48:32,705 - INFO - Loading model...
+2025-08-22 10:50:20,942 - INFO - Loading model...
+2025-08-22 10:54:00,757 - INFO - Loading model...
+2025-08-22 10:54:03,557 - INFO - Model loaded successfully.
+2025-08-22 10:54:03,587 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.129:8080
+2025-08-22 10:54:03,587 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-22 10:54:29,253 - INFO - 192.168.0.129 - - [22/Aug/2025 10:54:29] "GET / HTTP/1.1" 200 -
+2025-08-22 10:54:29,717 - INFO - 192.168.0.129 - - [22/Aug/2025 10:54:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-22 10:54:51,384 - INFO - Received input features: [[ 6.  5. 43.  3.  5.  3.  3.  1.  1.  2.]]
+2025-08-22 10:54:51,384 - ERROR - Error during prediction: 'CostModel' object has no attribute 'predict'
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\app.py", line 59, in index
+    prediction = loaded_model.predict(features)
+AttributeError: 'CostModel' object has no attribute 'predict'
+2025-08-22 10:54:51,384 - INFO - 192.168.0.129 - - [22/Aug/2025 10:54:51] "POST / HTTP/1.1" 200 -
+2025-08-22 13:19:57,584 - INFO - Loading model...
+2025-08-22 13:19:59,089 - INFO - Model loaded successfully.
+2025-08-22 13:19:59,124 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.129:8080
+2025-08-22 13:19:59,124 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-22 13:20:21,838 - INFO - 192.168.0.129 - - [22/Aug/2025 13:20:21] "GET / HTTP/1.1" 200 -
+2025-08-22 13:20:22,391 - INFO - 192.168.0.129 - - [22/Aug/2025 13:20:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-22 13:25:07,240 - INFO - Loading model...
+2025-08-22 13:25:09,199 - INFO - Model loaded successfully.
+2025-08-22 13:25:09,233 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.129:8080
+2025-08-22 13:25:09,233 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-22 13:25:24,413 - INFO - 192.168.0.129 - - [22/Aug/2025 13:25:24] "GET / HTTP/1.1" 200 -
+2025-08-22 13:25:50,083 - INFO - Received input features:    0  1    2  3  4  5  6  7  8  9
+0  5  5  3.0  3  5  1  4  1  1  2
+2025-08-22 13:25:50,083 - ERROR - Error during prediction: 'CostModel' object has no attribute 'prediction'
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\app.py", line 58, in index
+    prediction = loaded_model.prediction(features)
+AttributeError: 'CostModel' object has no attribute 'prediction'
+2025-08-22 13:25:50,092 - INFO - 192.168.0.129 - - [22/Aug/2025 13:25:50] "POST / HTTP/1.1" 200 -
+2025-08-22 13:32:26,187 - INFO - Loading model...
+2025-08-22 13:32:27,741 - INFO - Model loaded successfully: <class 'src.cost_model.CostModel'>
+2025-08-22 13:32:27,741 - INFO - Label encoders loaded successfully
+2025-08-22 13:32:27,783 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.129:8080
+2025-08-22 13:32:27,783 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-22 13:34:00,679 - INFO - 192.168.0.129 - - [22/Aug/2025 13:34:00] "GET / HTTP/1.1" 200 -
+2025-08-22 13:34:01,157 - INFO - 192.168.0.129 - - [22/Aug/2025 13:34:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-22 13:34:47,089 - INFO - Received input features:    lead_time  no_of_special_request  ...  type_of_meal_plan  room_type_reserved
+0          2                      2  ...                  2                   4
+
+[1 rows x 10 columns]
+2025-08-22 13:34:47,097 - INFO - Received input data:    lead_time  no_of_special_request  ...  type_of_meal_plan  room_type_reserved
+0          2                      2  ...                  2                   4
+
+[1 rows x 10 columns]
+2025-08-22 13:34:47,106 - INFO - Dropped duplicate rows.
+2025-08-22 13:34:47,106 - ERROR - 'dict' object has no attribute 'transform'
+2025-08-22 13:34:47,106 - ERROR - Error during prediction: 'dict' object has no attribute 'transform'
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\src\cost_model.py", line 22, in predication
+    x_transformed = self.label_encoder.transform(x_transformed)
+AttributeError: 'dict' object has no attribute 'transform'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\app.py", line 57, in index
+    prediction = loaded_model.predication(features)
+  File "C:\Users\DELL\Desktop\BookingPredictor\src\cost_model.py", line 33, in predication
+    raise CustomException(str(e), sys)
+src.Exception.exception.CustomException: 'dict' object has no attribute 'transform'
+2025-08-22 13:34:47,114 - INFO - 192.168.0.129 - - [22/Aug/2025 13:34:47] "POST / HTTP/1.1" 200 -
+2025-08-22 13:37:32,701 - INFO - Loading model...
+2025-08-22 13:37:34,235 - INFO - Model loaded successfully: <class 'src.cost_model.CostModel'>
+2025-08-22 13:37:34,274 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.129:8080
+2025-08-22 13:37:34,274 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-22 13:37:43,235 - INFO - 192.168.0.129 - - [22/Aug/2025 13:37:43] "GET / HTTP/1.1" 200 -
+2025-08-22 13:38:10,371 - INFO - Features for prediction:
+   lead_time  no_of_special_request  ...  type_of_meal_plan  room_type_reserved
+0          4                      7  ...                  2                   4
+
+[1 rows x 10 columns]
+2025-08-22 13:38:10,381 - INFO - Received input data:    lead_time  no_of_special_request  ...  type_of_meal_plan  room_type_reserved
+0          4                      7  ...                  2                   4
+
+[1 rows x 10 columns]
+2025-08-22 13:38:10,395 - INFO - Dropped duplicate rows.
+2025-08-22 13:38:10,395 - ERROR - 'dict' object has no attribute 'transform'
+2025-08-22 13:38:10,395 - ERROR - Prediction error: 'dict' object has no attribute 'transform'
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\src\cost_model.py", line 22, in predication
+    x_transformed = self.label_encoder.transform(x_transformed)
+AttributeError: 'dict' object has no attribute 'transform'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\app.py", line 46, in index
+    prediction = loaded_model.predict(features)
+  File "C:\Users\DELL\Desktop\BookingPredictor\src\cost_model.py", line 36, in predict
+    return self.predication(X)
+  File "C:\Users\DELL\Desktop\BookingPredictor\src\cost_model.py", line 33, in predication
+    raise CustomException(str(e), sys)
+src.Exception.exception.CustomException: 'dict' object has no attribute 'transform'
+2025-08-22 13:38:10,403 - INFO - 192.168.0.129 - - [22/Aug/2025 13:38:10] "POST / HTTP/1.1" 200 -
+2025-08-22 14:07:27,674 - INFO - Loading model...
+2025-08-22 14:07:29,249 - INFO - Model loaded successfully: <class 'src.cost_model.CostModel'>
+2025-08-22 14:07:29,249 - INFO - Label encoders loaded successfully
+2025-08-22 14:07:29,275 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.129:8080
+2025-08-22 14:07:29,275 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-22 14:07:37,601 - INFO - 192.168.0.129 - - [22/Aug/2025 14:07:37] "GET / HTTP/1.1" 200 -
+2025-08-22 14:08:03,243 - INFO - Features for prediction:
+   lead_time  no_of_special_request  ...  type_of_meal_plan  room_type_reserved
+0          4                      4  ...                  1                   5
+
+[1 rows x 10 columns]
+2025-08-22 14:08:03,251 - ERROR - Prediction error: y contains previously unseen labels: 1
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\ML_OPS\lib\site-packages\sklearn\utils\_encode.py", line 235, in _encode
+    return _map_to_integer(values, uniques)
+  File "C:\Users\DELL\Desktop\BookingPredictor\ML_OPS\lib\site-packages\sklearn\utils\_encode.py", line 174, in _map_to_integer
+    return xp.asarray([table[v] for v in values], device=device(values))
+  File "C:\Users\DELL\Desktop\BookingPredictor\ML_OPS\lib\site-packages\sklearn\utils\_encode.py", line 174, in <listcomp>
+    return xp.asarray([table[v] for v in values], device=device(values))
+  File "C:\Users\DELL\Desktop\BookingPredictor\ML_OPS\lib\site-packages\sklearn\utils\_encode.py", line 167, in __missing__
+    raise KeyError(key)
+KeyError: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\app.py", line 53, in index
+    features_df[col] = encoder.transform(features_df[col])
+  File "C:\Users\DELL\Desktop\BookingPredictor\ML_OPS\lib\site-packages\sklearn\preprocessing\_label.py", line 134, in transform
+    return _encode(y, uniques=self.classes_)
+  File "C:\Users\DELL\Desktop\BookingPredictor\ML_OPS\lib\site-packages\sklearn\utils\_encode.py", line 237, in _encode
+    raise ValueError(f"y contains previously unseen labels: {str(e)}")
+ValueError: y contains previously unseen labels: 1
+2025-08-22 14:08:03,302 - INFO - 192.168.0.129 - - [22/Aug/2025 14:08:03] "POST / HTTP/1.1" 200 -
+2025-08-22 14:15:13,646 - INFO - Loading model...
+2025-08-22 14:15:15,205 - INFO - Model loaded successfully: <class 'src.cost_model.CostModel'>
+2025-08-22 14:15:15,242 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.0.129:8080
+2025-08-22 14:15:15,242 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-22 14:15:36,491 - INFO - 192.168.0.129 - - [22/Aug/2025 14:15:36] "GET / HTTP/1.1" 200 -
+2025-08-22 14:16:05,973 - INFO - Features for prediction:
+   lead_time  no_of_special_request  ...  type_of_meal_plan  room_type_reserved
+0          3                      3  ...                  3                   4
+
+[1 rows x 10 columns]
+2025-08-22 14:16:05,998 - INFO - Received input data:    lead_time  no_of_special_request  ...  type_of_meal_plan  room_type_reserved
+0          3                      3  ...                  3                   4
+
+[1 rows x 10 columns]
+2025-08-22 14:16:06,009 - INFO - Dropped duplicate rows.
+2025-08-22 14:16:06,009 - ERROR - 'dict' object has no attribute 'transform'
+2025-08-22 14:16:06,012 - ERROR - Prediction error: 'dict' object has no attribute 'transform'
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\src\cost_model.py", line 22, in predication
+    x_transformed = self.label_encoder.transform(x_transformed)
+AttributeError: 'dict' object has no attribute 'transform'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\BookingPredictor\app.py", line 46, in index
+    prediction = loaded_model.predict(features)
+  File "C:\Users\DELL\Desktop\BookingPredictor\src\cost_model.py", line 36, in predict
+    return self.predication(X)
+  File "C:\Users\DELL\Desktop\BookingPredictor\src\cost_model.py", line 33, in predication
+    raise CustomException(str(e), sys)
+src.Exception.exception.CustomException: 'dict' object has no attribute 'transform'
+2025-08-22 14:16:06,020 - INFO - 192.168.0.129 - - [22/Aug/2025 14:16:06] "POST / HTTP/1.1" 200 -

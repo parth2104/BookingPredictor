@@ -27,6 +27,11 @@ class MainUtils:
         except Exception as e:
             logging.error(CustomException(e, sys))
             raise CustomException(e, sys)
+    def save_yaml(self,data, file_path):
+        
+        with open(file_path, 'w') as file:
+            yaml.dump(data, file, default_flow_style=False)
+        print(f"Saved YAML file at: {file_path}")
 
     def load_data(self, path):
         try:
@@ -129,34 +134,46 @@ class MainUtils:
 
     def get_tuned_model(self, model_name, x_train, y_train, x_test, y_test):
         try:
+            # Get base model
             model = self.get_base_model(model_name)
+
+            # Load hyperparameters and set them
             params = self.get_params(model, x_train, y_train)
             model.set_params(**params)
             logging.info(f"{model_name} - Parameters set: {params}")
 
+            # Cross-validation
             cv_score = cross_val_score(model, x_train, y_train, cv=5)
             logging.info(f"{model_name} - Cross-validation scores: {cv_score}")
             logging.info(f"{model_name} - Mean CV score: {np.mean(cv_score)}")
 
+            # Fit model
             model.fit(x_train, y_train)
-            pred = model.predict(x_test if isinstance(x_test, pd.DataFrame) else pd.DataFrame([x_test]))
 
+            # Ensure x_test is a DataFrame
+            x_test_df = x_test if isinstance(x_test, pd.DataFrame) else pd.DataFrame([x_test])
+            pred = model.predict(x_test_df)
 
+            # Compute metrics
             metrics = self.get_model_score(y_test, pred, average="weighted")
             accuracy = metrics["accuracy"]
 
             return (model_name, model, metrics, accuracy)
+
         except Exception as e:
-            logging.error(CustomException(str(e), sys))
-            return None
+            # Raise CustomException instead of returning None
+            logging.error(f"Error training model '{model_name}': {e}")
+            raise CustomException(f"Error training model '{model_name}': {e}", sys)
 
     def get_best_model_with_name_and_score(self, model_list):
         try:
-            if not model_list:
-                raise CustomException("Model list is empty", sys)
+            if not model_list or all(m is None for m in model_list):
+                raise CustomException("No valid models were trained. Model list is empty.", sys)
 
-            best_model_tuple = max(model_list, key=lambda x: x[3])
-            logging.info(f"best_model_tuple={best_model_tuple}")
+            # Filter out any None entries
+            valid_models = [m for m in model_list if m is not None]
+
+            best_model_tuple = max(valid_models, key=lambda x: x[3])
             best_model_name = best_model_tuple[0]
             best_model_object = best_model_tuple[1]
             best_model_metrics = best_model_tuple[2]
@@ -164,9 +181,10 @@ class MainUtils:
 
             logging.info(f"Best model selected: {best_model_name} with score: {best_model_score}")
             return best_model_metrics, best_model_object, best_model_name, best_model_score
+
         except Exception as e:
-            logging.error(CustomException(str(e), sys))
-            raise CustomException(str(e), sys)
+            logging.error(f"Error selecting best model: {e}")
+            raise CustomException(f"Error selecting best model: {e}", sys)
 
     def update_model_score(self, best_model_score):
         logging.info("Updating base model score in YAML...")

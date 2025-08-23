@@ -2,34 +2,52 @@ import sys
 import pandas as pd
 from src.Exception.exception import CustomException
 from src.logger.logger import logging
-import warnings
-
-warnings.filterwarnings("ignore")
 
 class CostModel:
-    def __init__(self, label_encoder, preprocessor, model):
-        self.preprocessor_obj = preprocessor
-        self.label_encoder = label_encoder
+    def __init__(self, encoder, preprocessor, model, feature_order):
+        """
+        encoder: Fitted OrdinalEncoder
+        preprocessor: Fitted preprocessor (ColumnTransformer)
+        model: Trained ML model
+        feature_order: List of features in correct order (exclude target)
+        """
+        if "booking_status" in feature_order:
+            raise ValueError("Target column 'booking_status' should not be included in feature_order")
+        self.encoder = encoder
+        self.preprocessor = preprocessor
         self.model = model
+        self.feature_order = feature_order
+        logging.info(f"CostModel initialized with feature_order: {feature_order}")
 
-    def predication(self, X):
+    def predict(self, X: pd.DataFrame):
         try:
-            logging.info(f"Received input data: {X.head(1)}")
+            input_columns = list(X.columns)
+            logging.info(f"Input columns for prediction: {input_columns}")
+            logging.info(f"Expected feature_order: {self.feature_order}")
+            logging.info(f"Input data: {X.head(1).to_dict()}")
 
-            x_transformed = X.drop_duplicates()
-            logging.info("Dropped duplicate rows.")
+            if "booking_status" in input_columns:
+                raise ValueError("Target column 'booking_status' found in input data")
+            missing_features = [col for col in self.feature_order if col not in input_columns]
+            extra_features = [col for col in input_columns if col not in self.feature_order]
+            if missing_features or extra_features:
+                raise ValueError(
+                    f"Feature mismatch: Missing features: {missing_features}, "
+                    f"Extra features: {extra_features}"
+                )
 
-            x_transformed = self.label_encoder.transform(x_transformed)
-            logging.info("Applied label encoder.")
+            cat_cols = [col for col in X.columns if X[col].dtype == 'object']
+            if cat_cols:
+                X[cat_cols] = self.encoder.transform(X[cat_cols].astype(str))
 
-            x_transformed = self.preprocessor_obj.transform(x_transformed)
-            logging.info("Applied preprocessor.")
+            X = X[self.feature_order]
 
-            logging.info("All transformations complete. Making predictions...")
-            return self.model.predict(x_transformed)
+            X_transformed = self.preprocessor.transform(X)
+
+            prediction = self.model.predict(X_transformed)
+            logging.info(f"Prediction result: {prediction}")
+            return prediction
 
         except Exception as e:
-            logging.error(CustomException(str(e), sys))
+            logging.error(f"Prediction failed: {e}")
             raise CustomException(str(e), sys)
-
-     

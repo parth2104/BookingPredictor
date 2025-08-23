@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/DELL/Desktop/BookingPredictor/mlruns/827556748297887940/451d942cbd0b4b28bdfd44897fb5602a/artifacts
+end_time: 1754742533819
+entry_point_name: ''
+experiment_id: '827556748297887940'
+lifecycle_stage: active
+run_id: 451d942cbd0b4b28bdfd44897fb5602a
+run_name: trusting-panda-697
+run_uuid: 451d942cbd0b4b28bdfd44897fb5602a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1754742533254
+status: 3
+tags: []
+user_id: DELL

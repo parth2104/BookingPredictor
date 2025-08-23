@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #e0f7fa, #80deea);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+            color: #00695c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        label {
+            font-weight: 500;
+            color: #004d40;
+            font-size: 1.1em;
+        }
+        input, select {
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #b0bec5;
+            border-radius: 8px;
+            background: #f9fafb;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00796b;
+            box-shadow: 0 0 8px rgba(0, 121, 107, 0.2);
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+        button {
+            padding: 14px;
+            background: linear-gradient(to right, #00796b, #004d40);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(to right, #00695c, #003d33);
+            transform: translateY(-2px);
+        }
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1em;
+            text-align: center;
+            animation: slideIn 0.3s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .result {
+            background: #e0f7fa;
+            color: #004d40;
+            border: 1px solid #4db6ac;
+        }
+        .error {
+            background: #ffebee;
+            color: #b71c1c;
+            border: 1px solid #ef5350;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Hotel Booking Prediction</h1>
+    <form method="POST" action="/">
+        {% for feature in selected_features %}
+            <div class="form-group">
+                <label for="{{ feature }}">{{ feature.replace('_', ' ').title() }}:</label>
+                {% if feature in categorical_cols %}
+                    <select id="{{ feature }}" name="{{ feature }}" required>
+                        <option value="">Select {{ feature.replace('_', ' ').title() }}</option>
+                        {% for value, label in categorical_mappings[feature].items() %}
+                            <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <input type="number" step="any" id="{{ feature }}" name="{{ feature }}" required>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit">Predict Booking Status</button>
+    </form>
+    {% if prediction is not none %}
+        <div class="message result">
+            <p>
+                {% if prediction == 1 %}
+                    Booking is likely to be <strong>confirmed</strong>!
+                {% else %}
+                    Booking is likely to be <strong>canceled</strong>.
+                {% endif %}
+            </p>
+        </div>
+    {% endif %}
+    {% if error %}
+        <div class="message error"><p>{{ error }}</p></div>
+    {% endif %}
+</div>
+</body>
+</html>

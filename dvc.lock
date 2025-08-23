@@ -5,11 +5,11 @@ stages:
     deps:
     - path: config/config.yaml
       hash: md5
-      md5: 16f7088b7b0339d6f4497cacad80138e
-      size: 665
+      md5: a4c0486e8ad098493a707353a8bb4f79
+      size: 698
     - path: config/path_config.py
       hash: md5
-      md5: 25ce06b24a74170c71bcac651e14b431
+      md5: c0412c1950f8f094defc1f80a18ac18d
       size: 1090
     - path: src/data_ingestion.py
       hash: md5
@@ -41,11 +41,11 @@ stages:
       size: 2619561
     - path: config/config.yaml
       hash: md5
-      md5: 16f7088b7b0339d6f4497cacad80138e
-      size: 665
+      md5: a4c0486e8ad098493a707353a8bb4f79
+      size: 698
     - path: config/path_config.py
       hash: md5
-      md5: 25ce06b24a74170c71bcac651e14b431
+      md5: c0412c1950f8f094defc1f80a18ac18d
       size: 1090
     - path: src/data_ingestion.py
       hash: md5
@@ -54,26 +54,26 @@ stages:
     outs:
     - path: artifacts/preprocessed/label_encoder.pkl
       hash: md5
-      md5: ecd321126cfcc886860e12dfafd92bb0
-      size: 1675
+      md5: 589f0f3cec3c1bfd6d6a8ec09534f15d
+      size: 1419
     - path: artifacts/preprocessed/preprocessed_train.npz
       hash: md5
-      md5: 792d3cbca4768134674af2cd32a94688
+      md5: d84528f5e235f270c022d21df8217082
       size: 322559
     - path: artifacts/preprocessed/preprocessor.pkl
       hash: md5
-      md5: fd2720de18adb720f9ae7b6b3d1e3f5c
-      size: 3437
+      md5: 3ae7fe63594453f608f3952976dd9dcc
+      size: 3280
   model_training:
     cmd: python -m src.model_training
     deps:
     - path: config/config.yaml
       hash: md5
-      md5: 16f7088b7b0339d6f4497cacad80138e
-      size: 665
+      md5: a4c0486e8ad098493a707353a8bb4f79
+      size: 698
     - path: config/path_config.py
       hash: md5
-      md5: 25ce06b24a74170c71bcac651e14b431
+      md5: c0412c1950f8f094defc1f80a18ac18d
       size: 1090
     - path: src/data_preprocessing.py
       hash: md5
@@ -82,5 +82,20 @@ stages:
     outs:
     - path: artifacts/Model/model.pkl
       hash: md5
-      md5: 959b755ce8fe9cdac77fd80db6d9d3f5
-      size: 134425291
+      md5: 9779c24c61cc7ddf08ce6ca5c7b12389
+      size: 134424891
+  Model_pusher_gcp:
+    cmd: python -m src.Model_pusher_gcp
+    deps:
+    - path: artifacts\Model\model.pkl
+      hash: md5
+      md5: 9779c24c61cc7ddf08ce6ca5c7b12389
+      size: 134424891
+    - path: config/config.yaml
+      hash: md5
+      md5: a4c0486e8ad098493a707353a8bb4f79
+      size: 698
+    - path: config\path_config.py
+      hash: md5
+      md5: c0412c1950f8f094defc1f80a18ac18d
+      size: 1090

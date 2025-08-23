@@ -7,8 +7,9 @@ google-cloud-storage
 dvc
 imbalanced-learn
 xgboost 
-mlflow
+mlflow==2.12.1
 python-dotenv
 dagshub
+flask
 
 #-e .
